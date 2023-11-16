@@ -12,6 +12,7 @@ class Order {
 
             // check whether there is items in my cart or not
             if (allItems.length > 0) {
+                await cartCollection.deleteMany();
                 const myPurchase = new finalOrder({ orderId, 'order':allItems });
                 await myPurchase.save();
                 res.status(200).json({ message: "Order placed successfully" });
@@ -21,12 +22,11 @@ class Order {
             }
         }
         catch (err) {
-            console.log(err);
             res.status(400).json({ error: 'Failed to purchase item' });
         }
     }
 
-    static ShowPlacedOrder = async (req, res) => {
+    static OrderHistory = async (req, res) => {
         try {
             const allItems = await finalOrder.find({});
             res.status(200).json(allItems);
