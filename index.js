@@ -32,3 +32,11 @@ mongoose.connect(dbURI)
 app.use(userRouter);
 app.use(productRouter);
 app.use(finalOrderRouter);
+
+app.get('*', (req, res) => {
+    res.status(404).json({ error: "Page not found" });
+});
+
+app.post('*', (req, res) => {
+    res.status(404).json({ error: "Page not found" });
+});
