@@ -12,8 +12,15 @@ class Order {
 
             // check whether there is items in my cart or not
             if (allItems.length > 0) {
+                let amount=0;
+                
+                allItems.forEach(({price})=>{
+                    amount=amount+price;
+                    console.log(price);
+                });
+
                 await cartCollection.deleteMany();
-                const myPurchase = new finalOrder({ orderId, 'order':allItems });
+                const myPurchase = new finalOrder({ orderId, 'order':allItems, amount });
                 await myPurchase.save();
                 res.status(200).json({ message: "Order placed successfully" });
             }
@@ -22,6 +29,7 @@ class Order {
             }
         }
         catch (err) {
+            console.log(err);
             res.status(400).json({ error: 'Failed to purchase item' });
         }
     }

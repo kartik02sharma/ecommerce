@@ -10,6 +10,10 @@ const OrderedProductSchema = mongoose.Schema({
         type:Array,
         required:true,
         default:null,
+    },
+    amount: {
+        type:Number,
+        required:true,
     }
 });
 
