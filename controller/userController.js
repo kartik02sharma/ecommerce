@@ -37,6 +37,9 @@ class UserControl {
                     res.status(401).json({ error: 'Password is incorrect' });
                 }
             }
+            else{
+                res.status(404).json({error:"Email not found"});
+            }
         }
         catch (err) {
             res.status(500).json({ error: 'Login failed' });
